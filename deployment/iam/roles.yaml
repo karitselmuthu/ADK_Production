@@ -1,0 +1,16 @@
+# IAM Service Account Role Requirements for Production ADK Runtime
+roles:
+  - name: roles/aiplatform.user
+    description: "Allows the agent engine to invoke Vertex AI models and query predictive endpoints."
+    
+  - name: roles/discoveryengine.admin
+    description: "Allows the Knowledge Agent to invoke search queries against Vertex AI Search datastores."
+
+  - name: roles/storage.objectAdmin
+    description: "Enables read/write operations on the artifacts GCS bucket for logs, traces, and files."
+
+  - name: roles/logging.logWriter
+    description: "Allows custom callbacks to export structured execution metrics and telemetry to Cloud Logging."
+
+  - name: roles/monitoring.metricWriter
+    description: "Allows Cloud Trace and OpenTelemetry hooks to write tracing metrics to Google Cloud Monitoring."

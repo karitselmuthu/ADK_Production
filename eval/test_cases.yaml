@@ -1,0 +1,15 @@
+# ADK Evaluation Configurations
+metrics_to_run:
+  - multi_turn_task_success
+  - hallucination
+  - safety
+  - final_response_quality
+
+# Custom metric definitions
+custom_metrics:
+  - name: compliance_terms_check
+    prompt_template: |
+      Assess if the agent's response correctly cites policy source references and maintains professional language.
+      Prompt: {prompt}
+      Response: {response}
+      Return JSON: {"score": <0|1>, "explanation": "<reason>"}

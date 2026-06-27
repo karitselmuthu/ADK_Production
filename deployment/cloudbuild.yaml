@@ -1,0 +1,38 @@
+# Google Cloud Build CI/CD Configuration for ADK Agent
+steps:
+  # 1. Install dependencies
+  - name: 'ghcr.io/astral-sh/uv:latest'
+    entrypoint: 'uv'
+    args: ['sync']
+    id: 'install-dependencies'
+
+  # 2. Run static checks and lints
+  - name: 'ghcr.io/astral-sh/uv:latest'
+    entrypoint: 'uv'
+    args: ['run', 'agents-cli', 'lint']
+    id: 'static-lints'
+    waitFor: ['install-dependencies']
+
+  # 3. Run automated tests
+  - name: 'ghcr.io/astral-sh/uv:latest'
+    entrypoint: 'uv'
+    args: ['run', 'pytest']
+    id: 'unit-integration-tests'
+    waitFor: ['install-dependencies']
+
+  # 4. Run Golden Dataset Quality Checks
+  - name: 'ghcr.io/astral-sh/uv:latest'
+    entrypoint: 'uv'
+    args: ['run', 'python', 'eval/evaluation_runner.py']
+    id: 'quality-evaluation'
+    waitFor: ['unit-integration-tests']
+
+  # 5. Deploy to Agent Runtime
+  - name: 'ghcr.io/astral-sh/uv:latest'
+    entrypoint: 'uv'
+    args: ['run', 'agents-cli', 'deploy', '--yes']
+    id: 'deploy-agent'
+    waitFor: ['quality-evaluation']
+
+options:
+  logging: CLOUD_LOGGING_ONLY

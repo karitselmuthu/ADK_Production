@@ -1,0 +1,25 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "hr_leave_policy",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "What is the policy for booking annual leave?"}]
+      }
+    },
+    {
+      "eval_case_id": "travel_reimbursement_calc",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "My user ID is USR-123. Can you calculate my travel reimbursement for 4 days? Hotel is $200/night, flight was $350, and standard daily allowance of $75."}]
+      }
+    },
+    {
+      "eval_case_id": "servicenow_incident_workflow",
+      "prompt": {
+        "role": "user",
+        "parts": [{"text": "My user ID is USR-987. Please create a ServiceNow incident for a system access outage."}]
+      }
+    }
+  ]
+}
